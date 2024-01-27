@@ -4,9 +4,9 @@ const productsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllProducts: builder.query({
             query: (query) => ({
-                url: "/academic-semesters",
+                url: "/products",
                 method: "GET",
-                query,
+                params: query
             })
         }),
     })

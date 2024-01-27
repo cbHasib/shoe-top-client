@@ -6,6 +6,7 @@ export type TRoute = {
 
 export type TUserPaths = {
     name: string;
+    key: string;
     path?: string;
     icon?: React.ReactNode;
     element?: React.ReactNode;

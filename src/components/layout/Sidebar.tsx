@@ -4,6 +4,7 @@ import { adminPaths } from "../../routes/admin.routes";
 import { useAppSelector } from "../../redux/hooks";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { userPaths } from "../../routes/user.routes";
+import { useLocation } from "react-router-dom";
 
 const { Sider } = Layout;
 
@@ -16,6 +17,8 @@ const Sidebar = () => {
 
   const user = useAppSelector(selectCurrentUser);
   const role = user?.role;
+
+  const {pathname} = useLocation();
 
   let sidebarItems;
   switch (role) {
@@ -45,7 +48,7 @@ const Sidebar = () => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={['Dashboard']}
+        defaultOpenKeys={[pathname]}
         items={sidebarItems}
       />
     </Sider>
