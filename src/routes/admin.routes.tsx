@@ -2,6 +2,10 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester";
 import React from "react";
 import { DashboardOutlined , ShopOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import CreateNewProduct from "../pages/admin/productManagement/CreateNewProduct";
+import ProductInventory from "../pages/admin/productManagement/ProductInventory";
+import UpdateProduct from "../pages/admin/productManagement/UpdateProduct";
+import ViewProduct from "../pages/admin/productManagement/ViewProduct";
 
 
 export const adminPaths = [
@@ -18,8 +22,23 @@ export const adminPaths = [
             {
                 name: "Create Product",
                 path: "create-product",
-                element: <AcademicSemester />,
+                element: <CreateNewProduct />,
             },
+            {
+                name: "Product Inventory",
+                path: "product-inventory",
+                element: <ProductInventory />,
+            },
+            {
+                name: "Update Product",
+                path: "update-product",
+                element: <UpdateProduct />,
+            },
+            {
+                name: "View Product",
+                path: "view-product/:slug",
+                element: <ViewProduct />,
+            }
         ]
     },
     {
