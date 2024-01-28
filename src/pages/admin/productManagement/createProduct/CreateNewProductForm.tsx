@@ -3,22 +3,27 @@ import BaseForm from "../../../../components/form/BaseForm";
 import BaseInput from "../../../../components/form/BaseInput";
 import { CREATE_PRODUCT_INPUTS } from "./CreateProduct.config";
 import { useAddProductMutation } from "../../../../redux/features/products/productsApi";
+import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
-const CreateNewProductForm = ({setOpen}:any) => {
+const CreateNewProductForm = ({ setOpen }: any) => {
 
-    const [createProduct] = useAddProductMutation();
+    const [createProduct, { isLoading }] = useAddProductMutation();
 
-    const onSubmit = async(values: any) => {
-        console.log(values);
-
-        await createProduct(values).unwrap();
-        setOpen(false);
+    const onSubmit = async (values: FieldValues) => {
+        const toastId = toast.loading('Adding product...');
+        try {
+            const res = await createProduct(values).unwrap();
+            toast.success(res.message, { id: toastId });
+            
+            setOpen(false);
+        } catch (error: any) {
+            toast.error(error.data.message);
+        }
     };
 
     return (
         <Row justify="center" align="middle">
-
-
             <Space direction="vertical" style={{ padding: 10 }}>
 
                 <Flex justify="center" align="center">
@@ -32,7 +37,7 @@ const CreateNewProductForm = ({setOpen}:any) => {
                                 }
                             </div>
 
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" loading={isLoading}>
                                 Submit
                             </Button>
                         </div>

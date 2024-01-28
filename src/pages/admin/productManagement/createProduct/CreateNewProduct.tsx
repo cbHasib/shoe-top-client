@@ -12,18 +12,6 @@ const CreateNewProduct = () => {
         setOpen(true);
     };
 
-    // const handleOk = (values:any) => {
-    //     setConfirmLoading(true);
-    //     setTimeout(() => {
-    //         setOpen(false);
-    //         setConfirmLoading(false);
-    //     }, 2000);
-    // };
-
-    // const handleCancel = () => {
-    //     console.log('Clicked cancel button');
-    //     setOpen(false);
-    // };
     return (
         <>
             <Button type="primary" icon={<PlusOutlined />} onClick={showModal}>
