@@ -1,7 +1,9 @@
 import { useState } from "react";
-import {  Divider, Row, Table, TableProps } from "antd";
+import {  Divider, Row, Table, TableProps, DatePicker } from "antd";
 import Title from "antd/es/typography/Title";
 import { useGetAllSalesQuery } from "../../../redux/features/sales/salesApi";
+import dayjs from 'dayjs';
+const { RangePicker } = DatePicker;
 
 type ColumnsType<T> = TableProps<T>['columns'];
 
@@ -116,6 +118,8 @@ const SalesHistory = () => {
             <Row justify="space-between">
                 <Title level={3}>Sales History</Title>
                 {/* <CreateNewProduct /> */}
+                <RangePicker onChange={(e) => setQuery({ ...query, "saleDate[$gte]": e?.[0]?.format('YYYY-MM-DD') as any, "saleDate[$lte]": e?.[1]?.format('YYYY-MM-DD') as any })} 
+                style={{marginRight: 10}}    />
             </Row>
             <Divider />
             <Table

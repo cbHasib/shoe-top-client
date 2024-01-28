@@ -1,4 +1,4 @@
-import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminDashboard from "../pages/admin/adminDashboard/AdminDashboard";
 import React from "react";
 import { DashboardOutlined , ShopOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import ProductInventory from "../pages/admin/productManagement/ProductInventory";

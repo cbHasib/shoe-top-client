@@ -1,7 +1,9 @@
+import SalesOverviewChart from "./SalesOverviewChart";
+
 const AdminDashboard = () => {
     return (
         <div>
-            Admin Dahsboard
+            <SalesOverviewChart />
         </div>
     );
 };
