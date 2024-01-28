@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDeleteProductMutation, useGetAllProductsQuery } from "../../../redux/features/products/productsApi";
+import { useDeleteProductMutation, useGetAllProductsQuery, useMultipleDeleteProductMutation } from "../../../redux/features/products/productsApi";
 import { Button, Collapse, CollapseProps, Divider, Popconfirm, Row, Slider, Space, Table, TableProps, DatePicker, Select } from "antd";
 import Title from "antd/es/typography/Title";
 import CreateNewProduct from "./createProduct/CreateNewProduct";
@@ -36,6 +36,8 @@ const ProductInventory = () => {
     }); // ['name', 'price'
     const { data, isLoading } = useGetAllProductsQuery(query);
     const [deleteProduct, { isLoading: deleteLoading }] = useDeleteProductMutation();
+    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+    const [deleteMultiple] = useMultipleDeleteProductMutation();
 
 
     const handleDeleteProduct = async (slug: string) => {
@@ -214,6 +216,29 @@ const ProductInventory = () => {
         },
     ];
 
+    const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+        setSelectedRowKeys(newSelectedRowKeys);
+      };
+
+    const rowSelection = {
+        selectedRowKeys,
+        onChange: onSelectChange,
+      };
+
+
+      const handleMultiDelete = async() => {
+        const toastId = toast.loading('Deleting products...');
+        try {
+
+            const res = await deleteMultiple(selectedRowKeys).unwrap();
+            toast.success(res?.message, { id: toastId });
+            setSelectedRowKeys([]);
+            
+        } catch (error:any) {
+            toast.error(error?.data?.message), { id: toastId };
+        }
+      }
+
 
     return (
         <div>
@@ -228,11 +253,18 @@ const ProductInventory = () => {
             </Row>
 
             <Divider />
+
+{
+    selectedRowKeys?.length > 0 ? ( <Button type="primary" onClick={handleMultiDelete} danger style={{marginBottom: 20}}>Delete Selected</Button>) : null
+}
+
+
             <Table
+            rowSelection={rowSelection}
                 bordered={true}
                 scroll={{ x: 1000 }}
                 columns={columns}
-                rowKey={(record) => record.name}
+                rowKey={(record) => record._id}
                 dataSource={(data?.data?.data || [])}
                 loading={isLoading}
                 pagination={{

@@ -37,7 +37,16 @@ const productsApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Products"] as any
         }),
+
+        multipleDeleteProduct: builder.mutation({
+            query: (body) => ({
+                url: `/products/multiple-delete`,
+                method: "POST",
+                body
+            }),
+            invalidatesTags: ["Products"] as any
+        }),
     })
 });
 
-export const { useGetAllProductsQuery, useAddProductMutation, useDeleteProductMutation, useUpdateProductMutation } = productsApi;
+export const { useGetAllProductsQuery, useAddProductMutation, useDeleteProductMutation, useUpdateProductMutation, useMultipleDeleteProductMutation } = productsApi;
