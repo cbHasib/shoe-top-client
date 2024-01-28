@@ -1,4 +1,4 @@
-export const CREATE_PRODUCT_INPUTS = [
+export const UPDATE_PRODUCT_INPUTS = [
     {
         label: 'Product Name',
         name: 'name',

@@ -13,7 +13,7 @@ const BaseInput = ({ type, name, label, defaultValue, ...rest }: IBaseInput) => 
     const { control, formState: { errors } } = useFormContext()
     return (
         <div>
-            {label ? <label>{label}</label> : null}
+            {label ? <label>{label} {rest.required ? <span style={{ color: 'red' }}>*</span> : null} </label> : null}
             <Controller
                 name={name}
                 defaultValue={defaultValue}

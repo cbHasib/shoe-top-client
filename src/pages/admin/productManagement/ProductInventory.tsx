@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDeleteProductMutation, useGetAllProductsQuery } from "../../../redux/features/products/productsApi";
-import { Button, Divider, GetProp, Popconfirm, Row, Space, Table, TableProps, Tooltip } from "antd";
+import { Button, Divider, Popconfirm, Row, Space, Table, TableProps } from "antd";
 import Title from "antd/es/typography/Title";
 import CreateNewProduct from "./createProduct/CreateNewProduct";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
+import UpdateProduct from "./updateProduct/UpdateProduct";
 
 type ColumnsType<T> = TableProps<T>['columns'];
-type TablePaginationConfig = Exclude<GetProp<TableProps, 'pagination'>, boolean>;
 
 interface DataType {
     name: string;
@@ -19,18 +19,10 @@ interface DataType {
     slug: string;
 }
 
-interface TableParams {
-    pagination?: TablePaginationConfig;
-    sortField?: string;
-    sortOrder?: string;
-    filters?: Parameters<GetProp<TableProps, 'onChange'>>[1];
-}
-
-
 const ProductInventory = () => {
     const [query, setQuery] = useState<Record<string, any>>({
-        page: 1,
-        limit: 1,
+        // page: 1,
+        // limit: 10,
     }); // ['name', 'price'
     const { data, isLoading } = useGetAllProductsQuery(query);
     const [deleteProduct, {isLoading: deleteLoading}] = useDeleteProductMutation();
@@ -68,7 +60,7 @@ const ProductInventory = () => {
         {
             title: 'Brand',
             dataIndex: 'brand',
-            width: '20%',
+            width: '10%',
             sorter: true,
         },
         {
@@ -89,9 +81,7 @@ const ProductInventory = () => {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
-                    <Tooltip title="Edit">
-                        <Button type="default" shape="circle" icon={<EditOutlined />} />
-                    </Tooltip>
+                    <UpdateProduct product={record} />
                         <Popconfirm
                             
                             title="Delete this product?"
@@ -108,26 +98,13 @@ const ProductInventory = () => {
         },
     ];
 
-    const [tableParams, setTableParams] = useState<TableParams>({
-        pagination: {
-            current: 1,
-            pageSize: 1,
-           total: data?.data?.meta?.total 
-        },
-    });
-
 
     const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter: any) => {
         console.log(pagination, filters, sorter);
-        setTableParams({
-            pagination,
-            filters,
-            ...sorter,
-        });
 
         const query = {
-            page: pagination.current,
-            limit: pagination.pageSize,
+            // page: pagination.current,
+            // limit: pagination.pageSize,
             ...filters,
             ...(sorter?.field ? { sort: sorter.order === 'ascend' ? sorter.field : `-${sorter.field}` } : {}),
         };
@@ -148,8 +125,13 @@ const ProductInventory = () => {
                 columns={columns}
                 rowKey={(record) => record.name}
                 dataSource={(data?.data?.data || [])}
-                pagination={tableParams.pagination}
                 loading={isLoading}
+                pagination={{
+                    defaultCurrent: 1,
+                    defaultPageSize: 10,
+                    showSizeChanger: true,
+                }}
+            
                 onChange={handleTableChange}
             />
         </div>

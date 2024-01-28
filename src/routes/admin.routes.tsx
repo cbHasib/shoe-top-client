@@ -1,11 +1,8 @@
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester";
 import React from "react";
 import { DashboardOutlined , ShopOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import CreateNewProduct from "../pages/admin/productManagement/createProduct/CreateNewProduct";
 import ProductInventory from "../pages/admin/productManagement/ProductInventory";
-import UpdateProduct from "../pages/admin/productManagement/UpdateProduct";
-import ViewProduct from "../pages/admin/productManagement/ViewProduct";
+import SalesHistory from "../pages/admin/salesManagement/SalesHistory";
 
 
 export const adminPaths = [
@@ -22,29 +19,11 @@ export const adminPaths = [
         icon: React.createElement(ShopOutlined),
         children: [
             {
-                name: "Create Product",
-                path: "create-product",
-                key: "create-product",
-                element: <CreateNewProduct />,
-            },
-            {
                 name: "Product Inventory",
                 path: "product-inventory",
                 key: "/admin/product-inventory",
                 element: <ProductInventory />,
             },
-            {
-                name: "Update Product",
-                path: "update-product",
-                key: "update-product",
-                element: <UpdateProduct />,
-            },
-            {
-                name: "View Product",
-                path: "view-product/:slug",
-                key: "view-product",
-                element: <ViewProduct />,
-            }
         ]
     },
     {
@@ -53,10 +32,10 @@ export const adminPaths = [
         icon: React.createElement(ShoppingCartOutlined),
         children: [
             {
-                name: "Create Sale",
-                path: "create-sale",
-                key: "create-sale",
-                element: <AcademicSemester />,
+                name: "Sales History",
+                path: "sales-history",
+                key: "/admin/sales-history",
+                element: <SalesHistory />,
             },
 
         ]
