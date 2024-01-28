@@ -12,8 +12,6 @@ const SaleProduct = ({product}:any) => {
         setOpen(true);
     };
 
-    console.log(product);
-
     return (
         <>
             <Tooltip title="Sale This Product">

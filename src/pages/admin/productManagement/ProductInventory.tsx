@@ -7,6 +7,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
 import UpdateProduct from "./updateProduct/UpdateProduct";
 import SaleProduct from "../salesManagement/saleProduct/SaleProduct";
+import Search from "antd/es/input/Search";
 
 type ColumnsType<T> = TableProps<T>['columns'];
 
@@ -113,10 +114,20 @@ const ProductInventory = () => {
         setQuery(query);
     }
 
+    const onSearch = (value: string) => {
+        const updateQuery = {
+            ...query,
+           searchTerm: value
+        }
+        setQuery(updateQuery);
+    }
+
+
 
     return (
         <div>
             <Row justify="space-between">
+            <Search placeholder="search for a product..." allowClear onSearch={onSearch} style={{ width: 220 }} />
                 <Title level={3}>Product Inventory</Title>
                 <CreateNewProduct />
             </Row>

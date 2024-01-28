@@ -12,7 +12,6 @@ const UpdateProduct = ({product}:any) => {
         setOpen(true);
     };
 
-    console.log(product);
 
     return (
         <>
