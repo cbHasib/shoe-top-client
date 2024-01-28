@@ -48,7 +48,6 @@ const SalesOverviewChart = () => {
         })
 
         const categories = data?.data?.map((item: any) => {
-            console.log(item);
             if(query.type === 'daily') {
                 return dayjs(item?._id).format('DD MMM YYYY')
             } else if(query.type === 'monthly') {
