@@ -1,7 +1,7 @@
-import { Input } from "antd";
+import { Input, InputNumber, Select } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 
-const BaseInput = ({ type, name, label, defaultValue }: { type: string, name: string, label?: string, defaultValue?: string }) => {
+const BaseInput = ({ type, name, label, defaultValue, ...rest }: { type: string, name: string, label?: string, defaultValue?: string }) => {
     const { control, formState: { errors } } = useFormContext()
     return (
         <div>
@@ -10,11 +10,21 @@ const BaseInput = ({ type, name, label, defaultValue }: { type: string, name: st
                 name={name}
                 defaultValue={defaultValue}
                 control={control}
+                rules={{ required:true}}
                 render={({ field }) => (
-                    type === 'password' ? <Input.Password {...field} className="my-2" placeholder={label} type={type} /> : <Input {...field} className="my-2" placeholder={label} type={type} />
+                    type === 'password' ? <Input.Password {...field} className="my-2" placeholder={label} type={type} /> :
+                    type === 'select' ? <Select
+                    className="my-2"
+                    style={{ width: '100%' }}
+                    {...field}
+                    {...rest}
+                  />
+                     : type === 'number' ? <InputNumber {...field} className="my-2" {...rest} /> :
+                    <Input {...rest} {...field} className="my-2" placeholder={label} type={type} />
                 )}
             />
-            {errors[name] && <span>This field is required</span>}
+            {errors[name] && <span style={{color: 'red'}}
+            >This field is required</span>}
         </div>
     );
 };

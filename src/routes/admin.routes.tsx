@@ -2,7 +2,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester";
 import React from "react";
 import { DashboardOutlined , ShopOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import CreateNewProduct from "../pages/admin/productManagement/CreateNewProduct";
+import CreateNewProduct from "../pages/admin/productManagement/createProduct/CreateNewProduct";
 import ProductInventory from "../pages/admin/productManagement/ProductInventory";
 import UpdateProduct from "../pages/admin/productManagement/UpdateProduct";
 import ViewProduct from "../pages/admin/productManagement/ViewProduct";
