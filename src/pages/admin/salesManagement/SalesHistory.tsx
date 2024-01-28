@@ -5,6 +5,7 @@ import { useGetAllSalesQuery } from "../../../redux/features/sales/salesApi";
 import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
 
+
 type ColumnsType<T> = TableProps<T>['columns'];
 
 interface DataType {
@@ -68,6 +69,7 @@ const SalesHistory = () => {
             dataIndex: 'saleDate',
             width: '10%',
             sorter: true,
+            render: (_, record) => ( <span>{dayjs(record.saleDate).format('DD MMM YYYY')}</span>),
         },
         {
             title: 'Seller',

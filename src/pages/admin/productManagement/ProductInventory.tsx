@@ -218,7 +218,7 @@ const ProductInventory = () => {
     return (
         <div>
             <Row justify="space-between">
-                <Search placeholder="search for a product..." allowClear value={query.searchTerm} onSearch={onSearch} style={{ width: 220 }} />
+                <Search placeholder="search for a product..." allowClear onSearch={onSearch} style={{ width: 220 }} />
                 <Title level={3}>Product Inventory</Title>
                 <CreateNewProduct />
             </Row>
