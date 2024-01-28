@@ -10,6 +10,7 @@ import SaleProduct from "../salesManagement/saleProduct/SaleProduct";
 import Search from "antd/es/input/Search";
 import dayjs from 'dayjs';
 import { PRODUCT_FILTER_INPUTS } from "./ProductFilter.config";
+import DublicateProduct from "./dublicateProduct/DublicateProduct";
 const { RangePicker } = DatePicker;
 
 type ColumnsType<T> = TableProps<T>['columns'];
@@ -117,6 +118,7 @@ const ProductInventory = () => {
             render: (_, record) => (
                 <Space size="middle">
                     <SaleProduct product={record} />
+                    <DublicateProduct product={record} />
                     <UpdateProduct product={record} />
                     <Popconfirm
                         title="Delete this product?"
