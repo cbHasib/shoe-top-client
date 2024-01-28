@@ -6,10 +6,11 @@ interface IBaseInput {
     name: string,
     label?: string,
     defaultValue?: string,
+    style?: any,
     [key: string]: any
 }
 
-const BaseInput = ({ type, name, label, defaultValue, ...rest }: IBaseInput) => {
+const BaseInput = ({ type, name, label, style, defaultValue, ...rest }: IBaseInput) => {
     const { control, formState: { errors } } = useFormContext()
     return (
         <div>
@@ -18,9 +19,9 @@ const BaseInput = ({ type, name, label, defaultValue, ...rest }: IBaseInput) => 
                 name={name}
                 defaultValue={defaultValue}
                 control={control}
-                rules={{ required: rest.required }}
+                rules={{ required: rest.required, ...(rest.max ? { max: rest.max } : {}), ...(rest.min ? { min: rest.min } : {}) }}
                 render={({ field }) => (
-                    type === 'password' ? <Input.Password {...field} className="my-2" placeholder={label} type={type} /> :
+                    type === 'password' ? <Input.Password {...style} {...field} className="my-2" placeholder={label} type={type} /> :
                         type === 'select' ? <Select
                             className="my-2"
                             style={{ width: '100%' }}
@@ -28,13 +29,13 @@ const BaseInput = ({ type, name, label, defaultValue, ...rest }: IBaseInput) => 
                             {...(delete rest.required,
                                 rest)}
                         />
-                            : type === 'number' ? <InputNumber {...field} className="my-2" {...(delete rest.required,
+                            : type === 'number' ? <InputNumber  {...style} {...field} className="my-2" {...(delete rest.required,
                                 rest)} placeholder={label} type={type} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '24px' }} /> :
                                 <Input {...(
                                     // remove required from input
                                     delete rest.required,
                                     rest
-                                )} {...field} className="my-2" placeholder={label} type={type} />
+                                )}  {...style} {...field} className="my-2" placeholder={label} type={type} />
                 )}
             />
             {errors[name] && <span style={{ color: 'red' }}

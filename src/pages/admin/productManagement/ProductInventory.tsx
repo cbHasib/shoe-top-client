@@ -6,6 +6,7 @@ import CreateNewProduct from "./createProduct/CreateNewProduct";
 import { DeleteOutlined } from "@ant-design/icons";
 import { toast } from "sonner";
 import UpdateProduct from "./updateProduct/UpdateProduct";
+import SaleProduct from "../salesManagement/saleProduct/SaleProduct";
 
 type ColumnsType<T> = TableProps<T>['columns'];
 
@@ -50,6 +51,7 @@ const ProductInventory = () => {
             dataIndex: 'price',
             width: '15%',
             sorter: true,
+            render: (_, record) => ( <span>${record.price}</span>),
         },
         {
             title: 'Quantity',
@@ -81,9 +83,9 @@ const ProductInventory = () => {
             key: 'action',
             render: (_, record) => (
                 <Space size="middle">
+                    <SaleProduct product={record} />
                     <UpdateProduct product={record} />
                         <Popconfirm
-                            
                             title="Delete this product?"
                             description={`Are you sure to delete this product?`}
                             onConfirm={() => handleDeleteProduct(record.slug)}
