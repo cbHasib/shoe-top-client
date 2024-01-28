@@ -44,7 +44,7 @@ const Login = () => {
                 <Title level={3} style={{width: '100%', textAlign: 'center'}}>Login to your account</Title>
 
                 <Flex justify="center" align="center">
-                    <BaseForm onSubmit={onFinish} defaultValues={{ email: 'hasibul.hasan2905@gmail.com', password: '123456' }}>
+                    <BaseForm onSubmit={onFinish} defaultValues={{ email: '', password: '' }}>
                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '24px' }}>
                             <BaseInput type="email" name="email" label="Email" />
                             <BaseInput type="password" name="password" label="Password" />
