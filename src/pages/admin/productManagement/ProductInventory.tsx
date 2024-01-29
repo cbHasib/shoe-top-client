@@ -38,7 +38,7 @@ const ProductInventory = () => {
     const { data, isLoading } = useGetAllProductsQuery(query);
     const [deleteProduct, { isLoading: deleteLoading }] = useDeleteProductMutation();
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-    const [deleteMultiple] = useMultipleDeleteProductMutation();
+    const [deleteMultiple, { isLoading: multipleDeleteLoading }] = useMultipleDeleteProductMutation();
 
 
     const handleDeleteProduct = async (slug: string) => {
@@ -137,7 +137,7 @@ const ProductInventory = () => {
 
 
     const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter: any) => {
-        console.log(pagination, filters, sorter);
+        // console.log(pagination, filters, sorter);
 
         const query = {
             // page: pagination.current,
@@ -184,7 +184,9 @@ const ProductInventory = () => {
                     <Space size="middle">
                         <div>
                             <Title level={5}>Price Range</Title>
-                            <Slider range max={data?.data?.meta?.highestPrice || 0} min={data?.data?.meta?.lowestPrice || 0} style={{ width: 250 }} onChangeComplete={(e) => onPriceRangeChange(e as number[])} />
+                            <Slider range max={data?.data?.meta?.highestPrice || 0} min={data?.data?.meta?.lowestPrice || 0}
+                                defaultValue={[data?.data?.meta?.lowestPrice || 0, data?.data?.meta?.highestPrice || 0]}
+                                style={{ width: 250 }} onChangeComplete={(e) => onPriceRangeChange(e as number[])} />
                         </div>
 
                         <div>
@@ -220,26 +222,26 @@ const ProductInventory = () => {
 
     const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
         setSelectedRowKeys(newSelectedRowKeys);
-      };
+    };
 
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,
-      };
+    };
 
 
-      const handleMultiDelete = async() => {
+    const handleMultiDelete = async () => {
         const toastId = toast.loading('Deleting products...');
         try {
 
-            const res = await deleteMultiple(selectedRowKeys).unwrap();
+            const res = await deleteMultiple({ _ids: selectedRowKeys }).unwrap();
             toast.success(res?.message, { id: toastId });
             setSelectedRowKeys([]);
-            
-        } catch (error:any) {
+
+        } catch (error: any) {
             toast.error(error?.data?.message), { id: toastId };
         }
-      }
+    }
 
 
     return (
@@ -256,13 +258,23 @@ const ProductInventory = () => {
 
             <Divider />
 
-{
-    selectedRowKeys?.length > 0 ? ( <Button type="primary" onClick={handleMultiDelete} danger style={{marginBottom: 20}}>Delete Selected</Button>) : null
-}
+            {
+                selectedRowKeys?.length > 0 ? (
+                    <Popconfirm
+                        title="Delete selected products?"
+                        description={`Are you sure to delete ${selectedRowKeys?.length} products?`}
+                        onConfirm={() => handleMultiDelete()}
+                        okText="Delete"
+                        cancelText="Cancel"
+                        okButtonProps={{ danger: true, loading: multipleDeleteLoading }}
+                    ><Button type="primary" danger style={{ marginBottom: 20 }}>Delete Selected</Button>
+                    </Popconfirm>
+                ) : null
+            }
 
 
             <Table
-            rowSelection={rowSelection}
+                rowSelection={rowSelection}
                 bordered={true}
                 scroll={{ x: 1000 }}
                 columns={columns}

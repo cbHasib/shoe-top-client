@@ -41,9 +41,9 @@ const SalesHistory = () => {
         {
             title: 'Product Name',
             dataIndex: 'productName',
-            sorter: true,
+            sorter: false,
             width: '20%',
-            render: (_, record) => ( <span>{record.product.name}</span>),
+            render: (_, record) => ( <span>{record?.product?.name}</span>),
         },
         {
             title: 'Price',
@@ -75,8 +75,8 @@ const SalesHistory = () => {
             title: 'Seller',
             dataIndex: 'sellerName',
             width: '10%',
-            sorter: true,
-            render: (_, record) => ( <span>{record.seller.name}</span>),
+            sorter: false,
+            render: (_, record) => ( <span>{record?.seller?.name}</span>),
         },
         // {
         //     title: 'Action',
@@ -103,7 +103,7 @@ const SalesHistory = () => {
 
 
     const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter: any) => {
-        console.log(pagination, filters, sorter);
+        // console.log(pagination, filters, sorter);
 
         const query = {
             // page: pagination.current,
