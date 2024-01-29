@@ -137,7 +137,7 @@ const ProductInventory = () => {
 
 
     const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter: any) => {
-        // console.log(pagination, filters, sorter);
+        console.log(pagination, filters, sorter);
 
         const query = {
             // page: pagination.current,
