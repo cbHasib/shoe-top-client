@@ -5,37 +5,46 @@ const productsApi = baseApi.injectEndpoints({
     
         getAllProducts: builder.query({
             query: (query) => ({
-                url: "/products",
+                url: "/products/get-all",
                 method: "GET",
                 params: query
             }),
-            providesTags: ["Products"] as any
+            providesTags: ["Products"]
+        }),
+
+        getAnalytics: builder.query({
+            query: () => ({
+                url: "/products/analytics",
+                method: "GET",
+            }),
+            providesTags: ["Analytics"]
         }),
 
         addProduct: builder.mutation({
             query: (body) => ({
-                url: "/products",
+                url: "/products/add-product",
                 method: "POST",
                 body
             }),
-            invalidatesTags: ["Products"] as any
+            invalidatesTags: ["Products", "Analytics"]
+        }),
+
+
+        updateProduct: builder.mutation({
+            query: ({slug, body}) => ({
+                url: `/products/update-product/${slug}`,
+                method: "PUT",
+                body
+            }),
+            invalidatesTags: ["Products", "Analytics"]
         }),
 
         deleteProduct: builder.mutation({
             query: (slug:string) => ({
-                url: `/products/${slug}`,
+                url: `/products/delete-product/${slug}`,
                 method: "DELETE",
             }),
-            invalidatesTags: ["Products"] as any
-        }),
-
-        updateProduct: builder.mutation({
-            query: ({slug, body}) => ({
-                url: `/products/${slug}`,
-                method: "PUT",
-                body
-            }),
-            invalidatesTags: ["Products"] as any
+            invalidatesTags: ["Products", "Analytics"]
         }),
 
         multipleDeleteProduct: builder.mutation({
@@ -44,9 +53,9 @@ const productsApi = baseApi.injectEndpoints({
                 method: "POST",
                 body
             }),
-            invalidatesTags: ["Products"] as any
+            invalidatesTags: ["Products", "Analytics"]
         }),
     })
 });
 
-export const { useGetAllProductsQuery, useAddProductMutation, useDeleteProductMutation, useUpdateProductMutation, useMultipleDeleteProductMutation } = productsApi;
+export const { useGetAllProductsQuery, useGetAnalyticsQuery, useAddProductMutation, useDeleteProductMutation, useUpdateProductMutation, useMultipleDeleteProductMutation } = productsApi;

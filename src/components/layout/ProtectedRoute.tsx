@@ -11,6 +11,11 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
         return <Navigate to="/login" replace={true} />;
     }
 
+    // return to dashboard if hit root or login page
+    if (window.location.pathname === '/' || window.location.pathname === '/login') {
+        return <Navigate to="/admin/dashboard" replace={true} />;
+    }
+
     return children;
 };
 

@@ -9,7 +9,7 @@ const salesApi = baseApi.injectEndpoints({
                 method: "GET",
                 params: query
             }),
-            providesTags: ["Sales"] as any
+            providesTags: ["Sales"]
         }),
 
         addSale: builder.mutation({
@@ -18,7 +18,7 @@ const salesApi = baseApi.injectEndpoints({
                 method: "POST",
                 body
             }),
-            invalidatesTags: ["Sales", "Products"] as any
+            invalidatesTags: ["Sales", "Products", "Analytics"]
         }),
 
         getSalesReportByCategory: builder.query({
@@ -27,7 +27,7 @@ const salesApi = baseApi.injectEndpoints({
                 method: "GET",
                 params: query
             }),
-            providesTags: ["Sales"] as any
+            providesTags: ["Sales"]
         }),
     })
 });

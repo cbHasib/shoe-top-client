@@ -11,7 +11,7 @@ const BarChart: React.FC<IBarChartProps> = ({loading, categories, data }) => {
     const barDataOption: ApexOptions = {
         chart: {
             type: 'bar',
-            height: 350
+            height: 350,
         },
         plotOptions: {
             bar: {
@@ -45,10 +45,21 @@ const BarChart: React.FC<IBarChartProps> = ({loading, categories, data }) => {
                     return `${val}`
                 }
             }
+        },
+        noData: {
+            text: loading ? 'Loading...' : 'No data to display',
+            align: 'center',
+            verticalAlign: 'middle',
+            offsetX: 0,
+            offsetY: 0,
+            style: {
+                fontSize: '14px',
+                fontFamily: undefined
+            }
         }
     }
 
-    if (loading) return <div>Loading...</div>
+    // if (loading) return <div>Loading...</div>
 
     return (
         <>

@@ -2,8 +2,25 @@ import { BaseQueryApi, BaseQueryFn, DefinitionType, FetchArgs, createApi, fetchB
 import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
+const baseApiLinks = {
+    development: "http://localhost:5000/api/v1",
+    production: "https://shoes-top-back.vercel.app/api/v1"
+}
+
+const baseApiLink = () => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        // dev code
+        console.log('development');
+        return baseApiLinks.development;
+    } else {
+        // production code
+        // console.log('production');
+        return baseApiLinks.production;
+    }
+}
+
 const baseQuery = fetchBaseQuery({
-    baseUrl: "https://shoes-top-back.vercel.app/api/v1",
+    baseUrl: baseApiLink(),
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
@@ -11,7 +28,7 @@ const baseQuery = fetchBaseQuery({
             headers.set("authorization", `${token}`);
         }
         return headers;
-    }
+    },
 });
 
 const baseQueryWithRefreshToken : BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType>= async (args, api, extraOptions) : Promise<any> => {
@@ -40,4 +57,5 @@ export const baseApi = createApi({
     reducerPath: "baseApi",
     baseQuery: baseQueryWithRefreshToken,
     endpoints: () => ({}),
+    tagTypes: ["Products", "Sales", "Analytics"],
 })
