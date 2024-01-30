@@ -60,7 +60,7 @@ const SalesOverviewChart = () => {
     }, [data?.data])
 
     return (
-        <div>
+        <div style={{ width: '100%', boxShadow: '0px 0px 5px rgba(0,0,0,0.05)', padding: 20, borderRadius: 10, backgroundColor: 'white', border: '1px solid #e8e8e8' }}>
 
             <Row justify="space-between" align="middle" style={{ marginBottom: 20 }}>
                 <div>
@@ -83,8 +83,9 @@ const SalesOverviewChart = () => {
                 </div>
             </Row>
 
-
+        <div style={{ width: "100%", backgroundColor: 'white', borderRadius: 10, padding: 10 }}>
             <BarChart loading={isLoading} data={series} categories={categoriesList} />
+        </div>
         </div>
     );
 };

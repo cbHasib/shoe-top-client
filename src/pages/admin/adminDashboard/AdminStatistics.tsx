@@ -6,7 +6,6 @@ import { useGetAnalyticsQuery } from '../../../redux/features/products/productsA
 const AdminStatistics = () => {
 
     const {data, isLoading} = useGetAnalyticsQuery(undefined)
-    console.log(data, isLoading);
 
     return (
         <div className='statistics-container'>

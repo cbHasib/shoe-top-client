@@ -18,6 +18,7 @@ const Login = () => {
     const dispatch = useAppDispatch();
 
     const onFinish = async (values: any) => {
+        if(!values.email || !values.password) return toast.error('Please fill all the fields!');
         const toastId = toast.loading('Logging in...');
         try {
 

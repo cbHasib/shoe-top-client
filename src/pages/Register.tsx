@@ -14,15 +14,15 @@ const Register = () => {
     const [register, { isLoading }] = useRegisterMutation();
 
     const onFinish = async (values: FieldValues) => {
+        if (!values.email || !values.password || !values.name) return toast.error('Please fill all the fields!');
         const toastId = toast.loading('Registering...');
         try {
-
             const userInfo = { name: values.name, email: values.email, password: values.password }
             const res = await register(userInfo).unwrap();
             toast.success(res?.message || 'User is registered succesfully!', { id: toastId });
             navigate(`/login`);
         } catch (err: any) {
-            toast.error(err?.data?.message, { id: toastId });
+            toast.error(err?.data?.message === 'Validation Error' ? err?.data?.errorSource[0]?.message : err?.data?.message, { id: toastId });
         }
     };
 
