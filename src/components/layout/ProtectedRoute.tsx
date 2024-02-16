@@ -18,7 +18,7 @@ const ProtectedRoute = ({ children, role }: IProtectedRouteProps) => {
 
     const token = useAppSelector(useCurrentToken);
 
-    let user : JwtPayloadUser | null = null;
+    let user: JwtPayloadUser | null = null;
 
     if (token) {
         user = verifyToken(token) as JwtPayloadUser;
@@ -32,6 +32,11 @@ const ProtectedRoute = ({ children, role }: IProtectedRouteProps) => {
     }
     if (!token) {
         return <Navigate to="/login" replace={true} />;
+    }
+
+    // return to dashboard if hit root or login page
+    if (window.location.pathname === '/' || window.location.pathname === '/login') {
+        return <Navigate to={`/${user?.role}/dashboard`} replace={true} />;
     }
 
     return children;

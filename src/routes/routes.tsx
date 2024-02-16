@@ -7,6 +7,7 @@ import { adminPaths } from "./admin.routes";
 import { buyerPaths } from "./buyer.routes";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import { sellerPaths } from "./seller.routes";
+import RedirectRoute from "../components/layout/RedirectRoute";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />,
+    },
+    {
+        path: "*",
+        element: <RedirectRoute />,
     }
 ])
 
