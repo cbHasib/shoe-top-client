@@ -17,12 +17,12 @@ const AdminStatistics = () => {
                             <div className="user-card card" key={index}>
                                 <div className="text-content">
                                     <span>{item.TITLE}</span>
-                                    <p>
+                                    <div>
 
                                     {
                                         isLoading ? <Skeleton.Button active={true} style={{marginTop: -5}} size="small" shape="default" block={true} /> : data ? <>{item.PREFIX}{getCommaSeparator(data?.data?.[item.key])}</> : <span style={{color: "#7e7e7e", fontSize: 18}}>Failed to load</span>
                                     }
-                                    </p>
+                                    </div>
                                     
                                 </div>
                                 <div className="icon">

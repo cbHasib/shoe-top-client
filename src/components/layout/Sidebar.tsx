@@ -3,14 +3,16 @@ import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
 import { adminPaths } from "../../routes/admin.routes";
 import { useAppSelector } from "../../redux/hooks";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { userPaths } from "../../routes/user.routes";
 import { useLocation } from "react-router-dom";
+import { buyerPaths } from "../../routes/buyer.routes";
+import { sellerPaths } from "../../routes/seller.routes";
 
 const { Sider } = Layout;
 
-const USER_ROLE : {[key: string]: 'admin' | 'user'} = {
+const USER_ROLE: { [key: string]: 'admin' | 'seller' | 'buyer' } = {
   ADMIN: 'admin',
-  USER: 'user',
+  SELLER: 'seller',
+  BUYER: 'buyer',
 }
 
 const Sidebar = () => {
@@ -18,16 +20,20 @@ const Sidebar = () => {
   const user = useAppSelector(selectCurrentUser);
   const role = user?.role;
 
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
 
   let sidebarItems;
   switch (role) {
     case USER_ROLE.ADMIN:
       sidebarItems = sidebarItemsGenerator(adminPaths, USER_ROLE.ADMIN);
       break;
-    
-    case USER_ROLE.USER:
-      sidebarItems = sidebarItemsGenerator(userPaths, USER_ROLE.STUDENT);
+
+    case USER_ROLE.BUYER:
+      sidebarItems = sidebarItemsGenerator(buyerPaths, USER_ROLE.BUYER);
+      break;
+
+    case USER_ROLE.SELLER:
+      sidebarItems = sidebarItemsGenerator(sellerPaths, USER_ROLE.SELLER);
       break;
 
     default:

@@ -1,19 +1,37 @@
 import React from 'react';
-import { useAppSelector } from '../../redux/hooks';
-import { useCurrentToken } from '../../redux/features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { logout, useCurrentToken } from '../../redux/features/auth/authSlice';
 import { Navigate } from 'react-router-dom';
+import { verifyToken } from '../../utils/verifyToken';
+import { JwtPayload } from 'jwt-decode';
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+interface IProtectedRouteProps {
+    children: React.ReactNode;
+    role: string | undefined;
+}
+
+interface JwtPayloadUser extends JwtPayload {
+    role: string;
+}
+
+const ProtectedRoute = ({ children, role }: IProtectedRouteProps) => {
 
     const token = useAppSelector(useCurrentToken);
 
-    if (!token) {
-        return <Navigate to="/login" replace={true} />;
+    let user : JwtPayloadUser | null = null;
+
+    if (token) {
+        user = verifyToken(token) as JwtPayloadUser;
     }
 
-    // return to dashboard if hit root or login page
-    if (window.location.pathname === '/' || window.location.pathname === '/login') {
-        return <Navigate to="/admin/dashboard" replace={true} />;
+    const dispatch = useAppDispatch();
+
+    if (role !== undefined && role !== user?.role) {
+        dispatch(logout());
+        return <Navigate to="/login" replace={true} />;
+    }
+    if (!token) {
+        return <Navigate to="/login" replace={true} />;
     }
 
     return children;

@@ -76,7 +76,7 @@
     font-size: 14px;
     font-weight: 400;
 }
-.statistic-wrapper .card .text-content p {
+.statistic-wrapper .card .text-content div {
     color: #000;
     font-size: 22px;
     font-weight: 600;

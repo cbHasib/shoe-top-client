@@ -4,6 +4,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { routesGenerator } from "../utils/routesGenerator";
 import { adminPaths } from "./admin.routes";
+import { buyerPaths } from "./buyer.routes";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
+import { sellerPaths } from "./seller.routes";
 
 const router = createBrowserRouter([
     {
@@ -12,8 +15,20 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <App />,
+        element: <ProtectedRoute role="admin"> <App /> </ProtectedRoute>,
         children: routesGenerator(adminPaths),
+    },
+
+    {
+        path: "/seller",
+        element: <ProtectedRoute role="seller"> <App /> </ProtectedRoute>,
+        children: routesGenerator(sellerPaths),
+    },
+    
+    {
+        path: "/buyer",
+        element:<ProtectedRoute role="buyer"> <App /> </ProtectedRoute>,
+        children: routesGenerator(buyerPaths),
     },
 
     {

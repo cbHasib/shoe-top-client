@@ -3,7 +3,7 @@ import { TMenuItems, TUserPaths } from "../types";
 import { NavLink } from "react-router-dom";
 
 
-export const sidebarItemsGenerator = (items: TUserPaths[], role: 'admin' | 'user') => {
+export const sidebarItemsGenerator = (items: TUserPaths[], role: 'admin' | 'buyer' | 'seller') => {
 
     const sidebarItems: MenuProps['items'] = items.reduce((acc: TMenuItems[], item) => {
 
