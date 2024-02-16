@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout } from "../../redux/features/auth/authSlice";
 import { PoweroffOutlined } from "@ant-design/icons";
 import Title from "antd/es/typography/Title";
+import { redirect } from "react-router-dom";
 
 const { Header, Content } = Layout;
 
@@ -14,6 +15,7 @@ const MainLayout = () => {
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
+    redirect('/login');
     dispatch(logout());    
   };
 
