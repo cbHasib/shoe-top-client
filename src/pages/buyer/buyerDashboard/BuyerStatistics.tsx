@@ -1,0 +1,42 @@
+import { STATISTIC_CONFIG, getCommaSeparator } from './BuyerStatistics.config';
+import './BuyerStatistics.css'
+import Title from 'antd/es/typography/Title';
+import { Divider, Skeleton } from 'antd';
+import { useGetAnalyticsQuery } from '../../../redux/features/products/productsApi';
+const BuyerStatistics = () => {
+
+    const {data, isLoading} = useGetAnalyticsQuery(undefined)
+
+    return (
+        <div className='statistics-container'>
+            <Title level={4}>Statistics</Title>
+            <div className="statistic-wrapper">
+                {
+                    STATISTIC_CONFIG.map((item, index) => {
+                        return (
+                            <div className="user-card card" key={index}>
+                                <div className="text-content">
+                                    <span>{item.TITLE}</span>
+                                    <div>
+
+                                    {
+                                        isLoading ? <Skeleton.Button active={true} style={{marginTop: -5}} size="small" shape="default" block={true} /> : data ? <>{item.PREFIX}{getCommaSeparator(data?.data?.[item.key])}</> : <span style={{color: "#7e7e7e", fontSize: 18}}>Failed to load</span>
+                                    }
+                                    </div>
+                                    
+                                </div>
+                                <div className="icon">
+                                    {item.ICON}
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div >
+
+            <Divider />
+        </div >
+    );
+};
+
+export default BuyerStatistics;

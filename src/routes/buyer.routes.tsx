@@ -1,15 +1,16 @@
 import React from "react";
-import { ShopOutlined } from '@ant-design/icons';
+import { DashboardOutlined, ShopOutlined } from '@ant-design/icons';
 import ProductInventory from "../pages/admin/productManagement/ProductInventory";
+import BuyerDashboard from "../pages/buyer/buyerDashboard/BuyerDashboard";
 
 export const buyerPaths = [
-    // {
-    //     name: "Dashboard",
-    //     path: "dashboard",
-    //     key: "/admin/dashboard",
-    //     icon: React.createElement(DashboardOutlined),
-    //     element: <AdminDashboard />,
-    // },
+    {
+        name: "Dashboard",
+        path: "dashboard",
+        key: "/buyer/dashboard",
+        icon: React.createElement(DashboardOutlined),
+        element: <BuyerDashboard />,
+    },
     {
         name: "Products",
         key: "products",
@@ -17,7 +18,7 @@ export const buyerPaths = [
         children: [
             {
                 name: "Product Inventory",
-                path: "product-inventory",
+                path: "products",
                 key: "/buyer/products",
                 element: <ProductInventory />,
             },

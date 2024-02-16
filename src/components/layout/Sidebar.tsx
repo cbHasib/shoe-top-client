@@ -2,10 +2,11 @@ import { Layout, Menu } from "antd";
 import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
 import { adminPaths } from "../../routes/admin.routes";
 import { useAppSelector } from "../../redux/hooks";
-import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useCurrentToken } from "../../redux/features/auth/authSlice";
 import { useLocation } from "react-router-dom";
 import { buyerPaths } from "../../routes/buyer.routes";
 import { sellerPaths } from "../../routes/seller.routes";
+import { verifyToken } from "../../utils/verifyToken";
 
 const { Sider } = Layout;
 
@@ -15,10 +16,20 @@ const USER_ROLE: { [key: string]: 'admin' | 'seller' | 'buyer' } = {
   BUYER: 'buyer',
 }
 
+interface JwtPayloadUser {
+  role: string;
+}
+
 const Sidebar = () => {
 
-  const user = useAppSelector(selectCurrentUser);
-  const role = user?.role;
+  const token = useAppSelector(useCurrentToken);
+
+  let user;
+
+  if (token) {
+      user = verifyToken(token) as JwtPayloadUser;
+  }
+  const role = user?.role as 'admin' | 'seller' | 'buyer';
 
   const { pathname } = useLocation();
 

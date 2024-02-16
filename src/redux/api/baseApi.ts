@@ -35,7 +35,7 @@ const baseQueryWithRefreshToken : BaseQueryFn<FetchArgs, BaseQueryApi, Definitio
         const res = await baseQuery(args, api, extraOptions);
 
         if (res.error?.status === 401) {
-            const refreshRes = await fetch("https://shoes-top-back.vercel.app/api/v1/auth/refresh-token", {
+            const refreshRes = await fetch(`${baseApiLink()}/auth/refresh-token`, {
                 method: "POST",
                 credentials: "include"
             });

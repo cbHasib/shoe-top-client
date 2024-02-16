@@ -11,6 +11,10 @@ import Search from "antd/es/input/Search";
 import dayjs from 'dayjs';
 import { PRODUCT_FILTER_INPUTS } from "./ProductFilter.config";
 import DublicateProduct from "./dublicateProduct/DublicateProduct";
+import { useAppSelector } from "../../../redux/hooks";
+import { JwtPayload } from "jwt-decode";
+import { useCurrentToken } from "../../../redux/features/auth/authSlice";
+import { verifyToken } from "../../../utils/verifyToken";
 const { RangePicker } = DatePicker;
 
 type ColumnsType<T> = TableProps<T>['columns'];
@@ -30,6 +34,10 @@ interface DataType {
     material: string;
 }
 
+interface JwtPayloadUser extends JwtPayload {
+    role: string;
+}
+
 const ProductInventory = () => {
     const [query, setQuery] = useState<Record<string, any>>({
         // page: 1,
@@ -40,6 +48,14 @@ const ProductInventory = () => {
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
     const [deleteMultiple, { isLoading: multipleDeleteLoading }] = useMultipleDeleteProductMutation();
 
+
+    const token = useAppSelector(useCurrentToken);
+
+    let user: JwtPayloadUser | null = null;
+
+    if (token) {
+        user = verifyToken(token) as JwtPayloadUser;
+    }
 
     const handleDeleteProduct = async (slug: string) => {
         const toastId = toast.loading('Deleting product...');
@@ -112,40 +128,43 @@ const ProductInventory = () => {
             render: (_, record) => (<span>{dayjs(record.releaseDate).format('DD MMM YYYY')}</span>),
         },
 
-        {
-            title: 'Action',
-            key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <SaleProduct product={record} />
-                    <DublicateProduct product={record} />
-                    <UpdateProduct product={record} />
-                    <Popconfirm
-                        title="Delete this product?"
-                        description={`Are you sure to delete this product?`}
-                        onConfirm={() => handleDeleteProduct(record.slug)}
-                        okText="Delete"
-                        cancelText="Cancel"
-                        okButtonProps={{ danger: true, loading: deleteLoading }}
-                    >
-                        <Button type="default" danger shape="circle" icon={<DeleteOutlined />} />
-                    </Popconfirm>
-                </Space>
-            ),
-        },
+        ...(user?.role === 'admin' || user?.role === 'seller' ? [
+            {
+                title: 'Action',
+                key: 'action',
+                render: (_:any, record : any) => (
+                    <Space size="middle">
+                        <SaleProduct product={record} />
+                        <DublicateProduct product={record} />
+                        <UpdateProduct product={record} />
+                        <Popconfirm
+                            title="Delete this product?"
+                            description={`Are you sure to delete this product?`}
+                            onConfirm={() => handleDeleteProduct(record.slug)}
+                            okText="Delete"
+                            cancelText="Cancel"
+                            okButtonProps={{ danger: true, loading: deleteLoading }}
+                        >
+                            <Button type="default" danger shape="circle" icon={<DeleteOutlined />} />
+                        </Popconfirm>
+                    </Space>
+                ),
+            },
+        ] : []),
     ];
 
 
     const handleTableChange: TableProps['onChange'] = (pagination, filters, sorter: any) => {
         console.log(pagination, filters, sorter);
 
-        const query = {
+        const newQuery = {
             // page: pagination.current,
             // limit: pagination.pageSize,
+            ...query,
             ...filters,
             ...(sorter?.field ? { sort: sorter.order === 'ascend' ? sorter.field : `-${sorter.field}` } : {}),
         };
-        setQuery(query);
+        setQuery(newQuery);
     }
 
     const onSearch = (value: string) => {
@@ -249,7 +268,9 @@ const ProductInventory = () => {
             <Row justify="space-between">
                 <Search placeholder="search for a product..." allowClear onSearch={onSearch} style={{ width: 220 }} />
                 <Title level={3}>Product Inventory</Title>
-                <CreateNewProduct />
+                {
+                    user?.role === 'buyer' ? <div></div> : <CreateNewProduct />
+                }
             </Row>
 
             <Row justify="space-between" align="middle">
@@ -259,7 +280,7 @@ const ProductInventory = () => {
             <Divider />
 
             {
-                selectedRowKeys?.length > 0 ? (
+                (selectedRowKeys?.length > 0 && user?.role !== 'buyer') ? (
                     <Popconfirm
                         title="Delete selected products?"
                         description={`Are you sure to delete ${selectedRowKeys?.length} products?`}
@@ -274,7 +295,7 @@ const ProductInventory = () => {
 
 
             <Table
-                rowSelection={rowSelection}
+                rowSelection={user?.role === 'buyer' ? undefined : rowSelection}
                 bordered={true}
                 scroll={{ x: 1000 }}
                 columns={columns}
