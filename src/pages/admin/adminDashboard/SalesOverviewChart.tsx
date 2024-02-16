@@ -18,9 +18,9 @@ const SalesOverviewChart = () => {
         // endDate: '2024-01-31',
         
         // startdate from 30 days ago
-        startDate: dayjs().subtract(30, 'day').format('YYYY-MM-DD'),
+        startDate: dayjs().subtract(15, 'day').format('YYYY-MM-DD'),
         endDate: dayjs().format('YYYY-MM-DD'),
-        type: 'monthly'
+        type: 'daily'
     })
     const { data, isLoading } = useGetSalesReportByCategoryQuery(query);
 
