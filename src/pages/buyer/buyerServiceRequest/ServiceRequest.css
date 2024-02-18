@@ -1,0 +1,65 @@
+.status {
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.pending {
+    background-color: #f8d7da; /* Light Red */
+    color: #721c24; /* Dark Red */
+}
+
+.in-progress {
+    background-color: #d4edda; /* Light Green */
+    color: #155724; /* Dark Green */
+}
+
+.completed {
+    background-color: #d1ecf1; /* Light Blue */
+    color: #0c5460; /* Dark Blue */
+}
+
+.cancelled {
+    background-color: #f1f1f1; /* Light Grey */
+    color: #555555; /* Dark Grey */
+}
+
+.rejected {
+    background-color: #e2e3e5; /* Light Grey */
+    color: #383d41; /* Dark Grey */
+}
+
+.delivered {
+    background-color: #cce5ff; /* Light Blue */
+    color: #004085; /* Dark Blue */
+}
+
+
+
+.color-view {
+    padding: 2px 14px; 
+    border-radius: 6px;
+    margin: 0 auto;
+    border: 1px solid #00000030;
+}
+
+.color-view.Black { background-color: #000000; color: #ffffff;}
+.color-view.White { background-color: #ffffff; color: #000000;}
+.color-view.Red { background-color: #ff0000; color: #ffffff;}
+.color-view.Blue { background-color: #0000ff; color: #ffffff;}
+.color-view.Green { background-color: #008000; color: #ffffff;}
+.color-view.Yellow { background-color: #ffff00; color: #000000;}
+.color-view.Orange { background-color: #ffa500; color: #ffffff;}
+.color-view.Purple { background-color: #800080; color: #ffffff;}
+.color-view.Pink { background-color: #ffc0cb; color: #000000;}
+.color-view.Brown { background-color: #a52a2a; color: #ffffff;}
+.color-view.Grey { background-color: #808080; color: #ffffff;}
+.color-view.Ivory { background-color: #fffff0;  color: #000000;}
+.color-view.Beige { background-color: #f5f5dc; color: #000000;}
+.color-view.Multi-color {
+    background: linear-gradient(45deg, #ff0000, #ffa500, #ffff00, #008000, #0000ff, #800080, #ff0000);
+    color: #ffffff;
+}
