@@ -1,51 +1,50 @@
-import { AiOutlineShop } from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
-import { FiDollarSign } from "react-icons/fi";
-import { PiUsers } from "react-icons/pi";
-import { TbShoppingBagDiscount } from "react-icons/tb";
+import { GrInProgress, GrServices } from "react-icons/gr";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { MdOutlineCancel, MdOutlinePendingActions } from "react-icons/md";
+import { TbTruckDelivery } from "react-icons/tb";
 
 export const STATISTIC_CONFIG = [
     {
-        key: 'totalUsers',
-        TITLE: 'Total Users',
-        ICON: <PiUsers />,
+        key: 'total',
+        TITLE: 'Total Service Requests',
+        ICON: <GrServices />        ,
         FALLBACK: 0,
         PREFIX: '',
     },
     {
-        key: 'productsInStock',
-        TITLE: 'In Stock',
-        ICON: <AiOutlineShop />,
+        key: 'pending',
+        TITLE: 'Pending Service Requests',
+        ICON: <MdOutlinePendingActions />        ,
         FALLBACK: 0,
         PREFIX: '',
     },
     {
-        key: 'productsOutOfStock',
-        TITLE: 'Out of Stock',
-        ICON: <AiOutlineShop />,
+        key: 'completed',
+        TITLE: 'Completed Service Requests',
+        ICON: <IoCheckmarkDoneCircleOutline />,
         FALLBACK: 0,
         PREFIX: '',
     },
     {
-        key: 'totalOrders',
-        TITLE: 'Total Orders',
-        ICON: <BsCartCheck />,
+        key: 'delivered',
+        TITLE: 'Delivered Service Requests',
+        ICON: <TbTruckDelivery />        ,
         FALLBACK: 0,
         PREFIX: '',
     },
     {
-        key: 'totalSaleQuantity',
-        TITLE: 'Sale Quantity',
-        ICON: <TbShoppingBagDiscount />,
+        key: 'inProgress',
+        TITLE: 'In Progress Service Requests',
+        ICON: <GrInProgress />        ,
         FALLBACK: 0,
         PREFIX: '',
     },
     {
-        key: 'totalSales',
-        TITLE: 'Total Sales',
-        ICON: <FiDollarSign />,
+        key: 'rejected',
+        TITLE: 'Rejected Service Requests',
+        ICON: <MdOutlineCancel />,
         FALLBACK: 0,
-        PREFIX: '$',
+        PREFIX: '',
     }
 ];
 

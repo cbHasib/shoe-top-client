@@ -1,19 +1,19 @@
-.statistics-container {
+.buyer-statistics-container {
     margin-bottom: 2rem;
 }
 
-.statistic-wrapper {
+.buyer-statistic-wrapper {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
     
     @media (max-width: 1450px) {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     @media (max-width: 650px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
     }
 
     @media (max-width: 450px) {
@@ -21,7 +21,7 @@
     }
     
 }
-.statistic-wrapper .card {
+.buyer-statistic-wrapper .card {
     background-color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -31,39 +31,39 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     border: 1px solid #e5e5e5;
 }
-.statistic-wrapper .card:first-child .icon {
+.buyer-statistic-wrapper .card:first-child .icon {
     background-color: rgba(130, 128, 255, 0.15);
     color: #8280ff;
 }
 
-.statistic-wrapper .card:nth-child(2) .icon {
+.buyer-statistic-wrapper .card:nth-child(2) .icon {
     background-color: rgba(3, 215, 183, 0.15);
     color: #03d7b7;
 }
 
-.statistic-wrapper .card:nth-child(3) .icon {
+.buyer-statistic-wrapper .card:nth-child(3) .icon {
     background-color: rgba(255, 128, 128, 0.15);
     color: #ff8080;
 }
 
-.statistic-wrapper .card:nth-child(4) .icon {
+.buyer-statistic-wrapper .card:nth-child(4) .icon {
     background-color: rgba(211, 128, 255, 0.15);
     color: #d380ff;
 }
 
-.statistic-wrapper .card:nth-child(5) .icon {
+.buyer-statistic-wrapper .card:nth-child(5) .icon {
     background-color: rgba(79, 126, 255, 0.15);
     color: #4f7eff;
 }
 
-.statistic-wrapper .card:nth-child(6) .icon {
+.buyer-statistic-wrapper .card:nth-child(6) .icon {
     background-color: rgba(25, 195, 42, 0.15);
     color: #19c32a;
 }
 
 
 
-.statistic-wrapper .card .text-content {
+.buyer-statistic-wrapper .card .text-content {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -71,19 +71,19 @@
     gap: 0.6rem;
     width: 60%;
 }
-.statistic-wrapper .card .text-content span {
+.buyer-statistic-wrapper .card .text-content span {
     color: #000;
     font-size: 14px;
     font-weight: 400;
 }
-.statistic-wrapper .card .text-content div {
+.buyer-statistic-wrapper .card .text-content div {
     color: #000;
     font-size: 22px;
     font-weight: 600;
     margin: 0;
     padding: 0;
 }
-.statistic-wrapper .card .icon {
+.buyer-statistic-wrapper .card .icon {
     width: 55px;
     height: 55px;
     display: grid;

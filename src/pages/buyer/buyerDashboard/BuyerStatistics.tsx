@@ -1,16 +1,16 @@
 import { STATISTIC_CONFIG, getCommaSeparator } from './BuyerStatistics.config';
 import './BuyerStatistics.css'
 import Title from 'antd/es/typography/Title';
-import { Divider, Skeleton } from 'antd';
-import { useGetAnalyticsQuery } from '../../../redux/features/products/productsApi';
+import { Skeleton } from 'antd';
+import { useGetMyServiceRequestStatsQuery } from '../../../redux/features/serviceRequest/service-requestApi';
 const BuyerStatistics = () => {
 
-    const {data, isLoading} = useGetAnalyticsQuery(undefined)
+    const {data, isLoading} = useGetMyServiceRequestStatsQuery(undefined)
 
     return (
-        <div className='statistics-container'>
+        <div className='buyer-statistics-container'>
             <Title level={4}>Statistics</Title>
-            <div className="statistic-wrapper">
+            <div className="buyer-statistic-wrapper">
                 {
                     STATISTIC_CONFIG.map((item, index) => {
                         return (
@@ -34,7 +34,7 @@ const BuyerStatistics = () => {
                 }
             </div >
 
-            <Divider />
+            {/* <Divider /> */}
         </div >
     );
 };
