@@ -32,6 +32,7 @@ interface DataType {
     style: string;
     model: string;
     material: string;
+    productCode: string;
 }
 
 interface JwtPayloadUser extends JwtPayload {
@@ -68,6 +69,11 @@ const ProductInventory = () => {
     }
 
     const columns: ColumnsType<DataType> = [
+        {
+            title: 'Code',
+            dataIndex: 'productCode',
+            sorter: true,
+        },
         {
             title: 'Name',
             dataIndex: 'name',
