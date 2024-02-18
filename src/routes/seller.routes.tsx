@@ -1,8 +1,9 @@
 import AdminDashboard from "../pages/admin/adminDashboard/AdminDashboard";
 import React from "react";
-import { DashboardOutlined , ShopOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { DashboardOutlined , ShopOutlined, ShoppingCartOutlined, SettingOutlined } from '@ant-design/icons';
 import ProductInventory from "../pages/admin/productManagement/ProductInventory";
 import SalesHistory from "../pages/admin/salesManagement/SalesHistory";
+import ServiceRequest from "../pages/buyer/buyerServiceRequest/ServiceRequest";
 
 
 export const sellerPaths = [
@@ -40,4 +41,11 @@ export const sellerPaths = [
 
         ]
     },
+    {
+        name: "Service Requests",
+        path: "service-requests",
+        key: "/seller/service-requests",
+        icon: React.createElement(SettingOutlined),
+        element: <ServiceRequest />,
+    }
 ]
