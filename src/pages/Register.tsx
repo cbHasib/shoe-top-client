@@ -17,7 +17,7 @@ const Register = () => {
         if (!values.email || !values.password || !values.name) return toast.error('Please fill all the fields!');
         const toastId = toast.loading('Registering...');
         try {
-            const userInfo = { name: values.name, email: values.email, password: values.password }
+            const userInfo = { name: values.name, email: values.email, password: values.password, role: values.role}
             const res = await register(userInfo).unwrap();
             toast.success(res?.message || 'User is registered succesfully!', { id: toastId });
             navigate(`/login`);
@@ -45,6 +45,8 @@ const Register = () => {
                                 <BaseInput type="text" name="name" label="Name" />
                                 <BaseInput type="email" name="email" label="Email" />
                                 <BaseInput type="password" name="password" label="Password" />
+                                {/* type */}
+                                <BaseInput type="radio" name="role" label="Role: " options={[{ label: 'Seller', value: 'seller' }, { label: 'Buyer', value: 'buyer' }]}  defaultValue='seller'/>
 
                                 <Button type="primary" htmlType="submit" loading={isLoading} style={{ width: '100%' }}>
                                     Register

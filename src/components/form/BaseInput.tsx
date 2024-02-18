@@ -1,4 +1,4 @@
-import { Input, InputNumber, Select } from "antd";
+import { Input, InputNumber, Radio, Select } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 
 interface IBaseInput {
@@ -13,7 +13,7 @@ interface IBaseInput {
 const BaseInput = ({ type, name, label, style, defaultValue, ...rest }: IBaseInput) => {
     const { control, formState: { errors } } = useFormContext()
     return (
-        <div>
+        <div style={{ width: '100%' }}>
             {label ? <label>{label} {rest.required ? <span style={{ color: 'red' }}>*</span> : null} </label> : null}
             <Controller
                 name={name}
@@ -29,7 +29,11 @@ const BaseInput = ({ type, name, label, style, defaultValue, ...rest }: IBaseInp
                             {...(delete rest.required,
                                 rest)}
                         />
-                            : type === 'number' ? <InputNumber  {...style} {...field} className="my-2" {...(delete rest.required,
+                            : type === 'radio' ? <Radio.Group options={rest?.options} buttonStyle="solid" {...field} {...(delete rest.required,
+                                rest)} />
+                            :
+                            
+                            type === 'number' ? <InputNumber  {...style} {...field} className="my-2" {...(delete rest.required,
                                 rest)} placeholder={label} type={type} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '24px' }} /> :
                                 <Input {...(
                                     // remove required from input
