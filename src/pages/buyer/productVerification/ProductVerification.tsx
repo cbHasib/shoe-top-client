@@ -23,7 +23,6 @@ const ProductVerification = () => {
         setProductCode(typeProductCode);        
     }
 
-    console.log(isError);
 
     return (
         <div>
