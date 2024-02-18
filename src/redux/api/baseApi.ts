@@ -7,7 +7,7 @@ const baseApiLinks = {
     production: "https://shoes-top-back.vercel.app/api/v1"
 }
 
-const baseApiLink = () => {
+export const baseApiLink = () => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
         // dev code
         console.log('development');
@@ -57,5 +57,5 @@ export const baseApi = createApi({
     reducerPath: "baseApi",
     baseQuery: baseQueryWithRefreshToken,
     endpoints: () => ({}),
-    tagTypes: ["Products", "Sales", "Analytics"],
+    tagTypes: ["Products", "Sales", "Analytics", "ServiceRequest", 'ViewProduct', 'ServiceRequestStats'],
 })

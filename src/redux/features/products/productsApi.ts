@@ -12,6 +12,14 @@ const productsApi = baseApi.injectEndpoints({
             providesTags: ["Products"]
         }),
 
+        getProductByCode: builder.query({
+            query: (code) => ({
+                url: `/products/get-product-by-code/${code}`,
+                method: "GET",
+            }),
+            providesTags: ["ViewProduct"]
+        }),
+
         getAnalytics: builder.query({
             query: () => ({
                 url: "/products/analytics",
@@ -58,4 +66,4 @@ const productsApi = baseApi.injectEndpoints({
     })
 });
 
-export const { useGetAllProductsQuery, useGetAnalyticsQuery, useAddProductMutation, useDeleteProductMutation, useUpdateProductMutation, useMultipleDeleteProductMutation } = productsApi;
+export const { useGetAllProductsQuery, useGetProductByCodeQuery, useGetAnalyticsQuery, useAddProductMutation, useDeleteProductMutation, useUpdateProductMutation, useMultipleDeleteProductMutation } = productsApi;
