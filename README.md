@@ -37,10 +37,10 @@ This is a simple shoe management system that allows users to add, view, update a
 ```
 git clone https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-fronten-cbHasib.git
 ```
-2. Run `yarn install` to install the dependencies
-3. Run `yarn dev` to start the development server
-4. Run `yarn build` to build the production version
-5. Run `yarn start` to start the production server
+2. Run ```yarn install``` to install the dependencies
+3. Run ```yarn dev``` to start the development server
+4. Run ```yarn build``` to build the production version
+5. Run ```yarn start``` to start the production server
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
