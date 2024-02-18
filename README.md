@@ -1,5 +1,8 @@
 # Shoe Top Client
 
+## Live Site
+[Shoe Top](https://shoe-top.netlify.app/)
+
 ## Description
 This is a simple shoe management system that allows users to add, view, update and delete shoes. It is a simple CRUD application that uses a RESTful API to communicate with the server. The server is built using Node.js and Express.js and the client is built using React.js. The server is hosted on Vercel and the client is hosted on Netlify.
 
